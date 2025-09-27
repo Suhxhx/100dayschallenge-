@@ -1,0 +1,21 @@
+// DAY-14
+// PROBLEM
+// Sliding Window Technique
+function minVisitorsInKHours(visitors, k) {
+    if (k > visitors.length) {
+        return null;
+    }
+    let windowSum = 0;
+    for (let i = 0; i < k; i++) {
+        windowSum += visitors[i];
+    }
+    let minSum = windowSum;
+    for (let i = k; i < visitors.length; i++) {
+        windowSum = windowSum - visitors[i - k] + visitors[i];
+        minSum = Math.min(minSum, windowSum);
+    }
+    return minSum;
+}
+let visitors = [120, 80, 100, 90, 150, 110, 70];
+let k = 3;
+console.log(minVisitorsInKHours(visitors, k));
